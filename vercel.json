@@ -1,0 +1,99 @@
+// Add these functions to your existing script.js
+
+// Global navigation function
+function navigateTo(page) {
+    if (typeof router !== 'undefined') {
+        router.navigate(page);
+    } else {
+        // Fallback for direct navigation
+        window.location.hash = page;
+    }
+}
+
+// Load hotel details
+function loadHotelDetails(hotelId) {
+    // This would normally fetch from an API
+    const hotel = hotelsData.find(h => h.id === parseInt(hotelId));
+    if (hotel) {
+        // Update hotel details in the page
+        document.querySelector('.hotel-title-section h1').textContent = hotel.name;
+        document.querySelector('.price-display').innerHTML = `$${hotel.price} <small>/night</small>`;
+        // ... update other details
+    }
+}
+
+// Apply filters on hotels page
+function applyFilters() {
+    const price = document.querySelector('.price-slider').value;
+    const selectedStars = document.querySelector('.star-btn.active').textContent;
+    const amenities = Array.from(document.querySelectorAll('.amenities input:checked'))
+        .map(cb => cb.parentElement.textContent.trim());
+    
+    showNotification(`Applying filters: Price < $${price}, ${selectedStars}, ${amenities.length} amenities`);
+    
+    // Filter hotels based on criteria
+    const filteredHotels = hotelsData.filter(hotel => {
+        let match = true;
+        
+        // Price filter
+        if (hotel.price > price) match = false;
+        
+        // Star rating filter
+        if (selectedStars !== 'All') {
+            const minStars = parseInt(selectedStars[0]);
+            if (hotel.rating < minStars) match = false;
+        }
+        
+        // Amenities filter (simplified)
+        if (amenities.length > 0) {
+            // Check if hotel has at least one of the selected amenities
+            const hasAmenity = amenities.some(amenity => 
+                hotel.amenities.includes(amenity)
+            );
+            if (!hasAmenity) match = false;
+        }
+        
+        return match;
+    });
+    
+    // Update results count
+    document.querySelector('.results-header h3').textContent = `${filteredHotels.length} Hotels Found`;
+    
+    // Render filtered hotels
+    renderHotels(filteredHotels, '#all-hotels-container');
+}
+
+// Social login function
+function socialLogin(provider) {
+    showNotification(`Signing in with ${provider}...`);
+    setTimeout(() => {
+        showNotification(`Successfully signed in with ${provider}!`);
+        navigateTo('profile');
+    }, 1500);
+}
+
+// Open booking modal
+function openBookingModal() {
+    const modal = document.getElementById('booking-modal');
+    modal.style.display = 'block';
+    
+    // Close modal when clicking X
+    document.querySelector('.close-modal').onclick = function() {
+        modal.style.display = 'none';
+    };
+    
+    // Close modal when clicking outside
+    window.onclick = function(event) {
+        if (event.target === modal) {
+            modal.style.display = 'none';
+        }
+    };
+    
+    // Handle booking form submission
+    document.getElementById('booking-form').onsubmit = function(e) {
+        e.preventDefault();
+        showNotification('Booking confirmed! Check your email for details.');
+        modal.style.display = 'none';
+        navigateTo('my-bookings');
+    };
+}

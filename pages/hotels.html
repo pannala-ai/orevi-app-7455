@@ -1,0 +1,73 @@
+<div class="hotels-page">
+    <div class="container">
+        <div class="page-header">
+            <h1>Browse All Hotels</h1>
+            <p>Discover amazing properties around the world</p>
+        </div>
+        
+        <!-- Filters -->
+        <div class="filters-section">
+            <div class="filters">
+                <div class="filter-group">
+                    <label>Price Range</label>
+                    <input type="range" min="50" max="1000" value="500" class="price-slider">
+                    <div class="price-range">
+                        <span>$50</span>
+                        <span>$500</span>
+                        <span>$1000+</span>
+                    </div>
+                </div>
+                
+                <div class="filter-group">
+                    <label>Star Rating</label>
+                    <div class="star-rating-filter">
+                        <button class="star-btn active">All</button>
+                        <button class="star-btn">5★</button>
+                        <button class="star-btn">4★+</button>
+                        <button class="star-btn">3★+</button>
+                    </div>
+                </div>
+                
+                <div class="filter-group">
+                    <label>Amenities</label>
+                    <div class="amenities">
+                        <label><input type="checkbox" checked> Free WiFi</label>
+                        <label><input type="checkbox"> Swimming Pool</label>
+                        <label><input type="checkbox"> Spa</label>
+                        <label><input type="checkbox"> Restaurant</label>
+                        <label><input type="checkbox"> Gym</label>
+                    </div>
+                </div>
+                
+                <button class="btn-primary" onclick="applyFilters()">Apply Filters</button>
+            </div>
+            
+            <!-- Search Results -->
+            <div class="hotels-list">
+                <div class="results-header">
+                    <h3>245 Hotels Found</h3>
+                    <select class="sort-select">
+                        <option>Sort by: Recommended</option>
+                        <option>Price: Low to High</option>
+                        <option>Price: High to Low</option>
+                        <option>Rating: High to Low</option>
+                    </select>
+                </div>
+                
+                <div class="hotels-container" id="all-hotels-container">
+                    <!-- Hotels will be loaded dynamically -->
+                </div>
+                
+                <!-- Pagination -->
+                <div class="pagination">
+                    <button class="page-btn"><i class="fas fa-chevron-left"></i></button>
+                    <button class="page-btn active">1</button>
+                    <button class="page-btn">2</button>
+                    <button class="page-btn">3</button>
+                    <button class="page-btn">4</button>
+                    <button class="page-btn"><i class="fas fa-chevron-right"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
