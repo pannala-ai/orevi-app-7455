@@ -5,7 +5,6 @@
   "main": "index.html",
   "scripts": {
     "start": "serve .",
-    "build": "echo 'No build step required for static site'",
     "dev": "serve ."
   },
   "keywords": ["hotel", "booking", "travel", "luxury"],
