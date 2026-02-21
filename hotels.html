@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Hotels | LuxStay</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation (same as index.html) -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-content">
+                <a href="index.html" class="logo">
+                    <i class="fas fa-hotel"></i>
+                    <span>LuxStay</span>
+                </a>
+                
+                <div class="nav-links">
+                    <a href="index.html">Home</a>
+                    <a href="hotels.html" class="active">Hotels</a>
+                    <a href="destinations.html">Destinations</a>
+                    <a href="deals.html">Deals</a>
+                    <a href="about.html">About</a>
+                </div>
+                
+                <div class="nav-actions">
+                    <button class="btn-secondary" onclick="window.location.href='login.html'">
+                        <i class="fas fa-user"></i>
+                        Sign In
+                    </button>
+                    <button class="btn-primary" onclick="window.location.href='list-property.html'">
+                        List Your Property
+                    </button>
+                </div>
+                
+                <button class="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hotels Page Content -->
+    <main class="hotels-page">
+        <div class="container">
+            <div class="page-header">
+                <h1>Browse All Hotels</h1>
+                <p>Discover amazing properties around the world</p>
+            </div>
+            
+            <!-- Filters -->
+            <div class="filters-section">
+                <div class="filters">
+                    <div class="filter-group">
+                        <label>Price Range</label>
+                        <input type="range" min="50" max="1000" value="500" class="price-slider">
+                        <div class="price-range">
+                            <span>$50</span>
+                            <span>$500</span>
+                            <span>$1000+</span>
+                        </div>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <label>Star Rating</label>
+                        <div class="star-rating-filter">
+                            <button class="star-btn active">All</button>
+                            <button class="star-btn">5★</button>
+                            <button class="star-btn">4★+</button>
+                            <button class="star-btn">3★+</button>
+                        </div>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <label>Amenities</label>
+                        <div class="amenities">
+                            <label><input type="checkbox" checked> Free WiFi</label>
+                            <label><input type="checkbox"> Swimming Pool</label>
+                            <label><input type="checkbox"> Spa</label>
+                            <label><input type="checkbox"> Restaurant</label>
+                            <label><input type="checkbox"> Gym</label>
+                        </div>
+                    </div>
+                    
+                    <button class="btn-primary" onclick="applyFilters()">Apply Filters</button>
+                </div>
+                
+                <!-- Search Results -->
+                <div class="hotels-list">
+                    <div class="results-header">
+                        <h3>245 Hotels Found</h3>
+                        <select class="sort-select">
+                            <option>Sort by: Recommended</option>
+                            <option>Price: Low to High</option>
+                            <option>Price: High to Low</option>
+                            <option>Rating: High to Low</option>
+                        </select>
+                    </div>
+                    
+                    <div class="hotels-container" id="all-hotels-container">
+                        <!-- Hotels will be loaded dynamically -->
+                    </div>
+                    
+                    <!-- Pagination -->
+                    <div class="pagination">
+                        <button class="page-btn"><i class="fas fa-chevron-left"></i></button>
+                        <button class="page-btn active">1</button>
+                        <button class="page-btn">2</button>
+                        <button class="page-btn">3</button>
+                        <button class="page-btn">4</button>
+                        <button class="page-btn"><i class="fas fa-chevron-right"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer (same as index.html) -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <a href="index.html" class="logo">
+                        <i class="fas fa-hotel"></i>
+                        <span>LuxStay</span>
+                    </a>
+                    <p>Your trusted partner for luxury hotel bookings worldwide. Experience comfort, style, and exceptional service.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <a href="about.html">About Us</a>
+                    <a href="careers.html">Careers</a>
+                    <a href="blog.html">Blog</a>
+                    <a href="press.html">Press</a>
+                    <a href="contact.html">Contact</a>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Support</h3>
+                    <a href="help.html">Help Center</a>
+                    <a href="safety.html">Safety Information</a>
+                    <a href="cancellation.html">Cancellation Options</a>
+                    <a href="covid.html">COVID-19 Response</a>
+                    <a href="report.html">Report a Problem</a>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Contact Info</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> 123 Hotel Street, NY 10001</p>
+                    <p><i class="fas fa-phone"></i> +1 (555) 123-4567</p>
+                    <p><i class="fas fa-envelope"></i> support@luxstay.com</p>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 LuxStay. All rights reserved.</p>
+                <div class="footer-links">
+                    <a href="privacy.html">Privacy Policy</a>
+                    <a href="terms.html">Terms of Service</a>
+                    <a href="cookies.html">Cookie Policy</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="data.js"></script>
+</body>
+</html>
