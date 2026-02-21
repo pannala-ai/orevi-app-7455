@@ -1,0 +1,180 @@
+<div class="deals-page">
+    <div class="container">
+        <div class="page-header">
+            <h1>Special Deals & Offers</h1>
+            <p>Exclusive discounts and packages for our members</p>
+        </div>
+        
+        <div class="deals-grid" id="deals-container">
+            <!-- Deals will be loaded dynamically -->
+        </div>
+    </div>
+</div>
+
+<style>
+    .deals-page {
+        padding: 100px 0;
+        background: var(--light);
+    }
+    
+    .deals-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        gap: 30px;
+    }
+    
+    .deal-card {
+        background: white;
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: var(--shadow);
+        transition: transform 0.3s ease;
+    }
+    
+    .deal-card:hover {
+        transform: translateY(-10px);
+    }
+    
+    .deal-badge {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        background: var(--accent);
+        color: white;
+        padding: 8px 15px;
+        border-radius: 20px;
+        font-weight: 600;
+        font-size: 0.9rem;
+    }
+    
+    .deal-image {
+        height: 200px;
+        width: 100%;
+        object-fit: cover;
+    }
+    
+    .deal-content {
+        padding: 25px;
+    }
+    
+    .deal-content h3 {
+        margin-bottom: 10px;
+    }
+    
+    .deal-price {
+        display: flex;
+        align-items: baseline;
+        gap: 10px;
+        margin: 15px 0;
+    }
+    
+    .current-price {
+        font-size: 1.8rem;
+        font-weight: 700;
+        color: var(--primary);
+    }
+    
+    .original-price {
+        text-decoration: line-through;
+        color: var(--secondary);
+    }
+    
+    .deal-features {
+        list-style: none;
+        margin: 20px 0;
+    }
+    
+    .deal-features li {
+        padding: 5px 0;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+    
+    .deal-features i {
+        color: var(--success);
+    }
+    
+    .deal-expiry {
+        color: var(--danger);
+        font-size: 0.9rem;
+        margin-top: 15px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+</style>
+
+<script>
+function loadDeals() {
+    const deals = [
+        {
+            title: "Weekend Getaway Package",
+            discount: "30% OFF",
+            image: "https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=800",
+            originalPrice: 500,
+            currentPrice: 350,
+            features: ["2 Nights Stay", "Breakfast Included", "Spa Access", "Late Checkout"],
+            expiry: "2024-06-30",
+            code: "WEEKEND30"
+        },
+        {
+            title: "Family Vacation Deal",
+            discount: "25% OFF",
+            image: "https://images.unsplash.com/photo-1571896349842-33c89424de2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800",
+            originalPrice: 1200,
+            currentPrice: 900,
+            features: ["4 Nights Stay", "Family Suite", "Kids Activities", "All Meals"],
+            expiry: "2024-07-15",
+            code: "FAMILY25"
+        },
+        {
+            title: "Honeymoon Special",
+            discount: "40% OFF",
+            image: "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800",
+            originalPrice: 2000,
+            currentPrice: 1200,
+            features: ["7 Nights Luxury Stay", "Private Pool", "Couples Spa", "Romantic Dinner"],
+            expiry: "2024-08-31",
+            code: "LOVE40"
+        }
+    ];
+    
+    const container = document.getElementById('deals-container');
+    if (container) {
+        container.innerHTML = deals.map(deal => `
+            <div class="deal-card">
+                <div style="position: relative;">
+                    <img src="${deal.image}" alt="${deal.title}" class="deal-image">
+                    <span class="deal-badge">${deal.discount}</span>
+                </div>
+                <div class="deal-content">
+                    <h3>${deal.title}</h3>
+                    <div class="deal-price">
+                        <span class="current-price">$${deal.currentPrice}</span>
+                        <span class="original-price">$${deal.originalPrice}</span>
+                    </div>
+                    <ul class="deal-features">
+                        ${deal.features.map(feature => `
+                            <li><i class="fas fa-check"></i> ${feature}</li>
+                        `).join('')}
+                    </ul>
+                    <div class="deal-expiry">
+                        <i class="fas fa-clock"></i>
+                        Expires: ${deal.expiry}
+                    </div>
+                    <button class="btn-primary" style="width: 100%; margin-top: 20px;" onclick="applyDeal('${deal.code}')">
+                        <i class="fas fa-tag"></i>
+                        Use Code: ${deal.code}
+                    </button>
+                </div>
+            </div>
+        `).join('');
+    }
+}
+
+function applyDeal(code) {
+    showNotification(`Discount code "${code}" applied!`);
+    navigateTo('hotels');
+}
+</script>

@@ -1,0 +1,17 @@
+{
+  "name": "luxstay-hotel-booking",
+  "version": "1.0.0",
+  "description": "Premium hotel booking platform",
+  "main": "index.html",
+  "scripts": {
+    "start": "serve .",
+    "build": "echo 'No build step required for static site'",
+    "dev": "serve ."
+  },
+  "keywords": ["hotel", "booking", "travel", "luxury"],
+  "author": "LuxStay",
+  "license": "MIT",
+  "devDependencies": {
+    "serve": "^14.0.0"
+  }
+}

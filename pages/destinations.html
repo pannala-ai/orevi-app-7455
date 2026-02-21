@@ -1,0 +1,138 @@
+<div class="destinations-page">
+    <div class="container">
+        <div class="page-header">
+            <h1>Popular Destinations</h1>
+            <p>Discover amazing places to stay around the world</p>
+        </div>
+        
+        <div class="destinations-grid" id="destinations-container">
+            <!-- Destinations will be loaded dynamically -->
+        </div>
+    </div>
+</div>
+
+<style>
+    .destinations-page {
+        padding: 100px 0;
+    }
+    
+    .destinations-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 30px;
+    }
+    
+    .destination-card {
+        position: relative;
+        border-radius: 15px;
+        overflow: hidden;
+        height: 400px;
+        cursor: pointer;
+        transition: transform 0.3s ease;
+    }
+    
+    .destination-card:hover {
+        transform: translateY(-10px);
+    }
+    
+    .destination-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s ease;
+    }
+    
+    .destination-card:hover .destination-image {
+        transform: scale(1.1);
+    }
+    
+    .destination-overlay {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: linear-gradient(transparent, rgba(0,0,0,0.8));
+        padding: 30px;
+        color: white;
+    }
+    
+    .destination-overlay h3 {
+        color: white;
+        margin-bottom: 10px;
+        font-size: 1.5rem;
+    }
+    
+    .destination-stats {
+        display: flex;
+        gap: 20px;
+        margin-top: 10px;
+        font-size: 0.9rem;
+        opacity: 0.9;
+    }
+</style>
+
+<script>
+// This script would be loaded by the router
+function loadDestinations() {
+    const destinations = [
+        {
+            name: "New York City",
+            image: "https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800",
+            hotels: 1250,
+            description: "The city that never sleeps"
+        },
+        {
+            name: "Paris",
+            image: "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?ixlib=rb-4.0.3&auto=format&fit=crop&w=800",
+            hotels: 890,
+            description: "City of love and lights"
+        },
+        {
+            name: "Tokyo",
+            image: "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?ixlib=rb-4.0.3&auto=format&fit=crop&w=800",
+            hotels: 760,
+            description: "Modern meets traditional"
+        },
+        {
+            name: "Dubai",
+            image: "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800",
+            hotels: 540,
+            description: "Luxury and innovation"
+        },
+        {
+            name: "Bali",
+            image: "https://images.unsplash.com/photo-1537953773345-d172ccf13cf1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800",
+            hotels: 420,
+            description: "Tropical paradise"
+        },
+        {
+            name: "London",
+            image: "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?ixlib=rb-4.0.3&auto=format&fit=crop&w=800",
+            hotels: 980,
+            description: "Historic and vibrant"
+        }
+    ];
+    
+    const container = document.getElementById('destinations-container');
+    if (container) {
+        container.innerHTML = destinations.map(dest => `
+            <div class="destination-card" onclick="searchDestination('${dest.name}')">
+                <img src="${dest.image}" alt="${dest.name}" class="destination-image">
+                <div class="destination-overlay">
+                    <h3>${dest.name}</h3>
+                    <p>${dest.description}</p>
+                    <div class="destination-stats">
+                        <span><i class="fas fa-hotel"></i> ${dest.hotels} hotels</span>
+                        <span><i class="fas fa-star"></i> 4.5+ avg rating</span>
+                    </div>
+                </div>
+            </div>
+        `).join('');
+    }
+}
+
+function searchDestination(destination) {
+    showNotification(`Searching hotels in ${destination}...`);
+    navigateTo('hotels');
+}
+</script>
